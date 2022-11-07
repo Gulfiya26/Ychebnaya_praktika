@@ -1,0 +1,373 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище WarehouseModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Bill_of_lading">
+          <Key>
+            <PropertyRef Name="ID_bill" />
+          </Key>
+          <Property Name="ID_bill" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Name_of_inv" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Number_of_product" Type="int" Nullable="false" />
+          <Property Name="Empl_full_name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Empl_post" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Card">
+          <Key>
+            <PropertyRef Name="ID_card" />
+          </Key>
+          <Property Name="ID_card" Type="int" Nullable="false" />
+          <Property Name="ID_bill" Type="int" Nullable="false" />
+          <Property Name="ID_rec_invoice" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Inventory">
+          <Key>
+            <PropertyRef Name="ID_inv" />
+          </Key>
+          <Property Name="ID_inv" Type="int" Nullable="false" />
+          <Property Name="Type_of_inv" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ID_card" Type="int" Nullable="false" />
+          <Property Name="ID_warehouse" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Receipt_invoice">
+          <Key>
+            <PropertyRef Name="ID_rec_invoice" />
+          </Key>
+          <Property Name="ID_rec_invoice" Type="int" Nullable="false" />
+          <Property Name="Date_rec" Type="date" Nullable="false" />
+          <Property Name="Name_of_inv_rec" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Number_of_product_rec" Type="int" Nullable="false" />
+          <Property Name="Empl_full_name_rec" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Empl_post_rec" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Warehouse">
+          <Key>
+            <PropertyRef Name="ID_warehouse" />
+          </Key>
+          <Property Name="ID_warehouse" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Card_Bill_of_lading">
+          <End Role="Bill_of_lading" Type="Self.Bill_of_lading" Multiplicity="1" />
+          <End Role="Card" Type="Self.Card" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bill_of_lading">
+              <PropertyRef Name="ID_bill" />
+            </Principal>
+            <Dependent Role="Card">
+              <PropertyRef Name="ID_bill" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Card_Receipt_invoice">
+          <End Role="Receipt_invoice" Type="Self.Receipt_invoice" Multiplicity="1" />
+          <End Role="Card" Type="Self.Card" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Receipt_invoice">
+              <PropertyRef Name="ID_rec_invoice" />
+            </Principal>
+            <Dependent Role="Card">
+              <PropertyRef Name="ID_rec_invoice" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_Card">
+          <End Role="Card" Type="Self.Card" Multiplicity="1" />
+          <End Role="Inventory" Type="Self.Inventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Card">
+              <PropertyRef Name="ID_card" />
+            </Principal>
+            <Dependent Role="Inventory">
+              <PropertyRef Name="ID_card" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_Warehouse">
+          <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="1" />
+          <End Role="Inventory" Type="Self.Inventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouse">
+              <PropertyRef Name="ID_warehouse" />
+            </Principal>
+            <Dependent Role="Inventory">
+              <PropertyRef Name="ID_warehouse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище WarehouseModelContainer">
+          <EntitySet Name="Bill_of_lading" EntityType="Self.Bill_of_lading" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Card" EntityType="Self.Card" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Inventory" EntityType="Self.Inventory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Receipt_invoice" EntityType="Self.Receipt_invoice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Warehouse" EntityType="Self.Warehouse" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Card_Bill_of_lading" Association="Self.FK_Card_Bill_of_lading">
+            <End Role="Bill_of_lading" EntitySet="Bill_of_lading" />
+            <End Role="Card" EntitySet="Card" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Card_Receipt_invoice" Association="Self.FK_Card_Receipt_invoice">
+            <End Role="Receipt_invoice" EntitySet="Receipt_invoice" />
+            <End Role="Card" EntitySet="Card" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_Card" Association="Self.FK_Inventory_Card">
+            <End Role="Card" EntitySet="Card" />
+            <End Role="Inventory" EntitySet="Inventory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_Warehouse" Association="Self.FK_Inventory_Warehouse">
+            <End Role="Warehouse" EntitySet="Warehouse" />
+            <End Role="Inventory" EntitySet="Inventory" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WarehouseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Bill_of_lading">
+          <Key>
+            <PropertyRef Name="ID_bill" />
+          </Key>
+          <Property Name="ID_bill" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Name_of_inv" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Number_of_product" Type="Int32" Nullable="false" />
+          <Property Name="Empl_full_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Empl_post" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Card" Relationship="Self.FK_Card_Bill_of_lading" FromRole="Bill_of_lading" ToRole="Card" />
+        </EntityType>
+        <EntityType Name="Card">
+          <Key>
+            <PropertyRef Name="ID_card" />
+          </Key>
+          <Property Name="ID_card" Type="Int32" Nullable="false" />
+          <Property Name="ID_bill" Type="Int32" Nullable="false" />
+          <Property Name="ID_rec_invoice" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Bill_of_lading" Relationship="Self.FK_Card_Bill_of_lading" FromRole="Card" ToRole="Bill_of_lading" />
+          <NavigationProperty Name="Receipt_invoice" Relationship="Self.FK_Card_Receipt_invoice" FromRole="Card" ToRole="Receipt_invoice" />
+          <NavigationProperty Name="Inventory" Relationship="Self.FK_Inventory_Card" FromRole="Card" ToRole="Inventory" />
+        </EntityType>
+        <EntityType Name="Inventory">
+          <Key>
+            <PropertyRef Name="ID_inv" />
+          </Key>
+          <Property Name="ID_inv" Type="Int32" Nullable="false" />
+          <Property Name="Type_of_inv" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ID_card" Type="Int32" Nullable="false" />
+          <Property Name="ID_warehouse" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Card" Relationship="Self.FK_Inventory_Card" FromRole="Inventory" ToRole="Card" />
+          <NavigationProperty Name="Warehouse" Relationship="Self.FK_Inventory_Warehouse" FromRole="Inventory" ToRole="Warehouse" />
+        </EntityType>
+        <EntityType Name="Receipt_invoice">
+          <Key>
+            <PropertyRef Name="ID_rec_invoice" />
+          </Key>
+          <Property Name="ID_rec_invoice" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Card" Relationship="Self.FK_Card_Receipt_invoice" FromRole="Receipt_invoice" ToRole="Card" />
+          <Property Name="Date_rec" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Name_of_inv_rec" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Number_of_product_rec" Type="Int32" Nullable="false" />
+          <Property Name="Empl_full_name_rec" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Empl_post_rec" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Warehouse">
+          <Key>
+            <PropertyRef Name="ID_warehouse" />
+          </Key>
+          <Property Name="ID_warehouse" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Inventory" Relationship="Self.FK_Inventory_Warehouse" FromRole="Warehouse" ToRole="Inventory" />
+        </EntityType>
+        <Association Name="FK_Card_Bill_of_lading">
+          <End Role="Bill_of_lading" Type="Self.Bill_of_lading" Multiplicity="1" />
+          <End Role="Card" Type="Self.Card" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bill_of_lading">
+              <PropertyRef Name="ID_bill" />
+            </Principal>
+            <Dependent Role="Card">
+              <PropertyRef Name="ID_bill" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Card_Receipt_invoice">
+          <End Role="Receipt_invoice" Type="Self.Receipt_invoice" Multiplicity="1" />
+          <End Role="Card" Type="Self.Card" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Receipt_invoice">
+              <PropertyRef Name="ID_rec_invoice" />
+            </Principal>
+            <Dependent Role="Card">
+              <PropertyRef Name="ID_rec_invoice" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_Card">
+          <End Role="Card" Type="Self.Card" Multiplicity="1" />
+          <End Role="Inventory" Type="Self.Inventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Card">
+              <PropertyRef Name="ID_card" />
+            </Principal>
+            <Dependent Role="Inventory">
+              <PropertyRef Name="ID_card" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventory_Warehouse">
+          <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="1" />
+          <End Role="Inventory" Type="Self.Inventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouse">
+              <PropertyRef Name="ID_warehouse" />
+            </Principal>
+            <Dependent Role="Inventory">
+              <PropertyRef Name="ID_warehouse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WarehouseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Bill_of_lading" EntityType="Self.Bill_of_lading" />
+          <EntitySet Name="Card" EntityType="Self.Card" />
+          <EntitySet Name="Inventory" EntityType="Self.Inventory" />
+          <EntitySet Name="Receipt_invoice" EntityType="Self.Receipt_invoice" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Warehouse" EntityType="Self.Warehouse" />
+          <AssociationSet Name="FK_Card_Bill_of_lading" Association="Self.FK_Card_Bill_of_lading">
+            <End Role="Bill_of_lading" EntitySet="Bill_of_lading" />
+            <End Role="Card" EntitySet="Card" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Card_Receipt_invoice" Association="Self.FK_Card_Receipt_invoice">
+            <End Role="Receipt_invoice" EntitySet="Receipt_invoice" />
+            <End Role="Card" EntitySet="Card" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_Card" Association="Self.FK_Inventory_Card">
+            <End Role="Card" EntitySet="Card" />
+            <End Role="Inventory" EntitySet="Inventory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventory_Warehouse" Association="Self.FK_Inventory_Warehouse">
+            <End Role="Warehouse" EntitySet="Warehouse" />
+            <End Role="Inventory" EntitySet="Inventory" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище WarehouseModelContainer" CdmEntityContainer="WarehouseEntities">
+          <EntitySetMapping Name="Bill_of_lading">
+            <EntityTypeMapping TypeName="WarehouseModel.Bill_of_lading">
+              <MappingFragment StoreEntitySet="Bill_of_lading">
+                <ScalarProperty Name="ID_bill" ColumnName="ID_bill" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Name_of_inv" ColumnName="Name_of_inv" />
+                <ScalarProperty Name="Number_of_product" ColumnName="Number_of_product" />
+                <ScalarProperty Name="Empl_full_name" ColumnName="Empl_full_name" />
+                <ScalarProperty Name="Empl_post" ColumnName="Empl_post" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Card">
+            <EntityTypeMapping TypeName="WarehouseModel.Card">
+              <MappingFragment StoreEntitySet="Card">
+                <ScalarProperty Name="ID_card" ColumnName="ID_card" />
+                <ScalarProperty Name="ID_bill" ColumnName="ID_bill" />
+                <ScalarProperty Name="ID_rec_invoice" ColumnName="ID_rec_invoice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inventory">
+            <EntityTypeMapping TypeName="WarehouseModel.Inventory">
+              <MappingFragment StoreEntitySet="Inventory">
+                <ScalarProperty Name="ID_inv" ColumnName="ID_inv" />
+                <ScalarProperty Name="Type_of_inv" ColumnName="Type_of_inv" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID_card" ColumnName="ID_card" />
+                <ScalarProperty Name="ID_warehouse" ColumnName="ID_warehouse" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Receipt_invoice">
+            <EntityTypeMapping TypeName="WarehouseModel.Receipt_invoice">
+              <MappingFragment StoreEntitySet="Receipt_invoice">
+                <ScalarProperty Name="Empl_post_rec" ColumnName="Empl_post_rec" />
+                <ScalarProperty Name="Empl_full_name_rec" ColumnName="Empl_full_name_rec" />
+                <ScalarProperty Name="Number_of_product_rec" ColumnName="Number_of_product_rec" />
+                <ScalarProperty Name="Name_of_inv_rec" ColumnName="Name_of_inv_rec" />
+                <ScalarProperty Name="Date_rec" ColumnName="Date_rec" />
+                <ScalarProperty Name="ID_rec_invoice" ColumnName="ID_rec_invoice" />
+                </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="WarehouseModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Warehouse">
+            <EntityTypeMapping TypeName="WarehouseModel.Warehouse">
+              <MappingFragment StoreEntitySet="Warehouse">
+                <ScalarProperty Name="ID_warehouse" ColumnName="ID_warehouse" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

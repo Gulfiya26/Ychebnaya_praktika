@@ -1,0 +1,40 @@
+﻿<Window x:Class="Ychebnaya_praktika.AddEditRecInv_window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Ychebnaya_praktika"
+        mc:Ignorable="d"
+        Title="AddEditRecInv_window" Height="450" Width="800">
+    <Grid Margin="0,0,0,92">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+
+        </Grid.RowDefinitions>
+        <Label Content="Номер приходной накладной:" Grid.Row="0" Grid.Column="0"></Label>
+        <Label Content="Дата завоза инвентаря:" Grid.Row="1" Grid.Column="0"></Label>
+        <Label Content="Наименование инвентаря:" Grid.Row="2" Grid.Column="0"></Label>
+        <Label Content="Количество инвентаря:" Grid.Row="3" Grid.Column="0"></Label>
+        <Label Content="ФИО сотрудника, принявшего инвентарь:" Grid.Row="4" Grid.Column="0"></Label>
+        <Label Content="Должность сотрудника:" Grid.Row="5" Grid.Column="0"></Label>
+        <TextBox x:Name="TxtIDrec" Grid.Row="0" Grid.Column="1"></TextBox>
+        <TextBox x:Name="TxtDate" Grid.Row="1" Grid.Column="1"></TextBox>
+        <TextBox x:Name="TxtNameinv" Grid.Row="2" Grid.Column="1"></TextBox>
+        <TextBox x:Name="TxtNumber" Grid.Row="3" Grid.Column="1"></TextBox>
+        <TextBox x:Name="TxtFIOEmpl" Grid.Row="4" Grid.Column="1"></TextBox>
+        <TextBox x:Name="TxtPostEmpl" Grid.Row="5" Grid.Column="1"></TextBox>
+        <Button x:Name="BackToRecInvWindow" Grid.Row="5" Grid.Column="0" Content="Назад к таблице" Width="170" Height="50" Click="BackToRecInvWindow_Click" Margin="70,76,0,-72" VerticalAlignment="Top" HorizontalAlignment="Left"></Button>
+        <Button x:Name="BtnSaveRec" Content="Добавить" Grid.Row="5" Click="BtnSaveRec_Click" Height="50" Grid.ColumnSpan="2" Margin="311,76,0,-72" VerticalAlignment="Top" HorizontalAlignment="Left" Width="170"/>
+        <Button x:Name="BtnPDF" Content="Сохранить в PDF" Grid.Column="1" Margin="156,76,0,-72" Grid.Row="5" Height="50" Click="BtnPDF_Click" VerticalAlignment="Top" HorizontalAlignment="Left" Width="170" />
+    </Grid>
+</Window>

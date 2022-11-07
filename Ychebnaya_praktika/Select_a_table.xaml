@@ -1,0 +1,14 @@
+﻿<Window x:Class="Ychebnaya_praktika.Select_a_table"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Ychebnaya_praktika"
+        mc:Ignorable="d"
+        Title="Select_a_table" Height="450" Width="800">
+    <Grid>
+        <TextBlock Text="Выберите таблицу" FontSize="40" Margin="213,112,213,230" ></TextBlock>
+        <Button x:Name="go_to_receipt_invoice" Width="200" Height="50" Content="Приходная накладная" Margin="492,271,0,0" Click="go_to_receipt_invoice_Click" VerticalAlignment="Top" HorizontalAlignment="Left"></Button>
+        <Button x:Name="go_to_warehouse" Width="200" Height="50" Content="Склад" Margin="100,271,0,0" Click="go_to_warehouse_Click" VerticalAlignment="Top" HorizontalAlignment="Left"></Button>
+    </Grid>
+</Window>

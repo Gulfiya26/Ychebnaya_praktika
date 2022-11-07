@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b19717de1235451bb5c02dece63ead0b" Name="Diagram1" ZoomLevel="97">
+        <EntityTypeShape EntityType="WarehouseModel.Bill_of_lading" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="WarehouseModel.Card" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="WarehouseModel.Inventory" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="WarehouseModel.Receipt_invoice" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WarehouseModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WarehouseModel.Warehouse" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <AssociationConnector Association="WarehouseModel.FK_Card_Bill_of_lading" ManuallyRouted="false" />
+        <AssociationConnector Association="WarehouseModel.FK_Card_Receipt_invoice" ManuallyRouted="false" />
+        <AssociationConnector Association="WarehouseModel.FK_Inventory_Card" ManuallyRouted="false" />
+        <AssociationConnector Association="WarehouseModel.FK_Inventory_Warehouse" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
