@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Ychebnaya_praktika"
         mc:Ignorable="d"
-        Title="Select_a_table" Height="450" Width="800">
+        Title="Select_a_table" Height="450" Width="800" Background="PeachPuff">
     <Grid>
         <TextBlock Text="Выберите таблицу" FontSize="40" Margin="213,112,213,230" ></TextBlock>
         <Button x:Name="go_to_receipt_invoice" Width="200" Height="50" Content="Приходная накладная" Margin="492,271,0,0" Click="go_to_receipt_invoice_Click" VerticalAlignment="Top" HorizontalAlignment="Left"></Button>

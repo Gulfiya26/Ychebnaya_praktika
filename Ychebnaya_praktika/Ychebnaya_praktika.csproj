@@ -80,6 +80,9 @@
     <Compile Include="Select_a_table.xaml.cs">
       <DependentUpon>Select_a_table.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\UpdateRecInv_window.xaml.cs">
+      <DependentUpon>UpdateRecInv_window.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Warehouse_window.xaml.cs">
       <DependentUpon>Warehouse_window.xaml</DependentUpon>
     </Compile>
@@ -96,6 +99,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Select_a_table.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\UpdateRecInv_window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

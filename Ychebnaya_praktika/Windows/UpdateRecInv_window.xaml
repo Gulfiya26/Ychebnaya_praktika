@@ -1,12 +1,13 @@
-﻿<Window x:Class="Ychebnaya_praktika.AddEditRecInv_window"
+﻿<Window x:Class="Ychebnaya_praktika.Windows.UpdateRecInv_window"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Ychebnaya_praktika"
+        xmlns:local="clr-namespace:Ychebnaya_praktika.Windows"
         mc:Ignorable="d"
-        Title="AddEditRecInv_window" Height="450" Width="800" Background="PeachPuff">
+        Title="UpdateRecInv_window" Height="450" Width="800"  Background="PeachPuff">
     <Grid Margin="0,0,0,92">
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
@@ -26,13 +27,13 @@
         <Label Content="Количество инвентаря:" Grid.Row="3" Grid.Column="0"></Label>
         <Label Content="ФИО сотрудника, принявшего инвентарь:" Grid.Row="4" Grid.Column="0"></Label>
         <Label Content="Должность сотрудника:" Grid.Row="5" Grid.Column="0"></Label>
-        <TextBox x:Name="TxtIDrec" Grid.Row="0" Grid.Column="1"></TextBox>
-        <TextBox x:Name="TxtDate" Grid.Row="1" Grid.Column="1"></TextBox>
-        <TextBox x:Name="TxtNameinv" Grid.Row="2" Grid.Column="1"></TextBox>
-        <TextBox x:Name="TxtNumber" Grid.Row="3" Grid.Column="1"></TextBox>
-        <TextBox x:Name="TxtFIOEmpl" Grid.Row="4" Grid.Column="1"></TextBox>
-        <TextBox x:Name="TxtPostEmpl" Grid.Row="5" Grid.Column="1"></TextBox>
-        <Button x:Name="BackToRecInvWindow" Grid.Row="5" Grid.Column="0" Content="Назад к таблице" Width="170" Click="BackToRecInvWindow_Click" Margin="134,76,0,-72" HorizontalAlignment="Left"/>
-        <Button x:Name="BtnSaveRec" Content="Сохранить" Grid.Row="5" Click="BtnSaveRec_Click" Margin="91,76,135,-72" Grid.Column="1"/>
+        <TextBox x:Name="TxtIDrecUp" Grid.Row="0" Grid.Column="1"></TextBox>
+        <TextBox x:Name="TxtDateUp" Grid.Row="1" Grid.Column="1"></TextBox>
+        <TextBox x:Name="TxtNameinvUp" Grid.Row="2" Grid.Column="1"></TextBox>
+        <TextBox x:Name="TxtNumberUp" Grid.Row="3" Grid.Column="1"></TextBox>
+        <TextBox x:Name="TxtFIOEmplUp" Grid.Row="4" Grid.Column="1"></TextBox>
+        <TextBox x:Name="TxtPostEmplUp" Grid.Row="5" Grid.Column="1"></TextBox>
+        <Button x:Name="BackToRecInvWindowUp" Grid.Row="5" Grid.Column="0" Content="Назад к таблице" Width="170" Click="BackToRecInvWindowUp_Click" Margin="134,76,0,-72" HorizontalAlignment="Left"/>
+        <Button x:Name="BtnSaveRecUp" Content="Сохранить" Grid.Row="5" Click="BtnSaveRecUp_Click" Margin="91,76,135,-72" Grid.Column="1"/>
     </Grid>
 </Window>

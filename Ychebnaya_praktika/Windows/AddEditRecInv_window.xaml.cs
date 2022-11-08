@@ -93,10 +93,6 @@ namespace Ychebnaya_praktika
 
         }
 
-        private void BtnPDF_Click(object sender, RoutedEventArgs e)
-        {
-           
         
-        }
     }
 }

@@ -4,6 +4,12 @@
              xmlns:local="clr-namespace:Ychebnaya_praktika"
              StartupUri="Select_a_table.xaml">
     <Application.Resources>
-         
+        <Style TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Raleway" />
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="FontFamily" Value="Raleway" />
+        </Style>
+        
     </Application.Resources>
 </Application>

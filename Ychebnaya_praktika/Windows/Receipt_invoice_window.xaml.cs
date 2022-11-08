@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Ychebnaya_praktika.Models;
+using Word = Microsoft.Office.Interop.Word;
 
 
 namespace Ychebnaya_praktika
@@ -40,13 +41,7 @@ namespace Ychebnaya_praktika
         {
             Dgreceiptinvoice.ItemsSource = _context.Receipt_invoice.ToList();
         }
-        private void BtnEditRec_Click(object sender, RoutedEventArgs e)
-        {
-            AddEditRecInv_window addedit = new AddEditRecInv_window(_context, this, (sender as Button).DataContext as Receipt_invoice);
-            this.Hide();
-            addedit.Show();
-
-        }
+        
 
         private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
@@ -90,6 +85,99 @@ namespace Ychebnaya_praktika
                 _window.RefreshRec();
                 this.Close();
             }*/
+        }
+
+        private void BtnPDF_Click(object sender, RoutedEventArgs e)
+        {
+            List<Receipt_invoice> recs;
+
+            using (WarehouseEntities warehouseEntities = new WarehouseEntities())
+            {
+                recs = warehouseEntities.Receipt_invoice.ToList().OrderBy(s => s.ID_rec_invoice).ToList();
+                var app = new Word.Application();
+                Word.Document document = app.Documents.Add();
+
+                Word.Paragraph paragraph =
+                document.Paragraphs.Add();
+                Word.Range range = paragraph.Range;
+                range.Text = "";
+                paragraph.set_Style("Заголовок 1");
+                range.InsertParagraphAfter();
+                Word.Paragraph tableParagraph = document.Paragraphs.Add();
+                Word.Range tableRange = tableParagraph.Range;
+                Word.Table studentsTable =
+                document.Tables.Add(tableRange, recs.Count() + 1, 6);
+                studentsTable.Borders.InsideLineStyle =
+                studentsTable.Borders.OutsideLineStyle =
+                Word.WdLineStyle.wdLineStyleSingle;
+                studentsTable.Range.Cells.VerticalAlignment =
+                Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
+                Word.Range cellRange;
+                cellRange = studentsTable.Cell(1, 1).Range;
+                cellRange.Text = "Номер накладного";                
+                cellRange = studentsTable.Cell(1, 2).Range;
+                cellRange.Text = "Дата";
+                cellRange = studentsTable.Cell(1, 3).Range;
+                cellRange.Text = "Инвентарь";
+                cellRange = studentsTable.Cell(1, 4).Range;
+                cellRange.Text = "Количество инвентаря";
+                cellRange = studentsTable.Cell(1, 5).Range;
+                cellRange.Text = "Сотрудник принявший инвентарь";
+                cellRange = studentsTable.Cell(1, 6).Range;
+                cellRange.Text = "Должность сотрудника";
+                cellRange = studentsTable.Cell(1, 6).Range;
+                studentsTable.Rows[1].Range.Bold = 1;
+                studentsTable.Rows[1].Range.ParagraphFormat.Alignment =
+                Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                int i = 1;
+                foreach (var currentrep in recs)
+                {
+                    cellRange = studentsTable.Cell(i + 1, 1).Range;
+                    cellRange.Text = currentrep.ID_rec_invoice.ToString();
+                    cellRange.ParagraphFormat.Alignment =
+                    Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                    cellRange = studentsTable.Cell(i + 1, 2).Range;
+                    cellRange.Text = currentrep.Date_rec.ToString();
+                    cellRange.ParagraphFormat.Alignment =
+                    Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                    cellRange = studentsTable.Cell(i + 1, 3).Range;
+                    cellRange.Text = currentrep.Name_of_inv_rec.ToString();
+                    cellRange.ParagraphFormat.Alignment =
+                    Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                    cellRange = studentsTable.Cell(i + 1, 4).Range;
+                    cellRange.Text = currentrep.Number_of_product_rec.ToString();
+                    cellRange.ParagraphFormat.Alignment =
+                     Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                    cellRange = studentsTable.Cell(i + 1, 5).Range;
+                    cellRange.Text = currentrep.Empl_full_name_rec.ToString();
+                    cellRange.ParagraphFormat.Alignment =
+                    Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                    cellRange = studentsTable.Cell(i + 1, 6).Range;
+                    cellRange.Text = currentrep.Empl_post_rec.ToString();
+                    cellRange.ParagraphFormat.Alignment =
+                    Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                    cellRange = studentsTable.Cell(i + 1, 6).Range;
+                    i++;
+                }
+                Word.Paragraph countStudentsParagraph = document.Paragraphs.Add();
+                Word.Range countStudentsRange =
+                countStudentsParagraph.Range;
+                countStudentsRange.Text = $"Количество накладных -{recs.Count()}";
+                countStudentsRange.Font.Color = Word.WdColor.wdColorDarkRed;
+                countStudentsRange.InsertParagraphAfter();
+                document.Words.Last.InsertBreak(Word.WdBreakType.wdPageBreak);
+
+                app.Visible = true;
+                document.SaveAs2(@"C:\Users\Гульфия\Desktop\ПрактикаВорд.docx");
+                document.SaveAs2(@"C:\Users\Гульфия\Desktop\ПрактикаПдф.pdf",
+                Word.WdExportFormat.wdExportFormatPDF);
+            }
+        }
+        private void BtnUpdateRecInv_Click(object sender, RoutedEventArgs e)
+        {
+            Windows.UpdateRecInv_window update = new Windows.UpdateRecInv_window(_context, sender, this);
+            this.Hide();
+            update.Show();
         }
     }
 }

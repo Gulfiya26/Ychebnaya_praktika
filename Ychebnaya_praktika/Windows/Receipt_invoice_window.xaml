@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Ychebnaya_praktika"
         mc:Ignorable="d"
-        Title="Receipt_invoice_window" Height="450" Width="800">
+        Title="Receipt_invoice_window" Height="450" Width="800"  Background="PeachPuff">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="3.0*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="0" x:Name="Dgreceiptinvoice" AutoGenerateColumns="False" IsReadOnly="True" ColumnWidth="*" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+        <DataGrid  Background="PeachPuff" Grid.Row="0" x:Name="Dgreceiptinvoice" AutoGenerateColumns="False" IsReadOnly="True" ColumnWidth="*" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Номер приходной накладной" Binding="{Binding ID_rec_invoice}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Дата" Binding="{Binding Date_rec}"></DataGridTextColumn>
@@ -22,20 +22,21 @@
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button x:Name="BtnEditRec" Content="Изменить" Click="BtnEditRec_Click"></Button>
+                            <Button x:Name="BtnDeleteRec" Content="Удалить" Click="BtnDeleteRec_Click"></Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button x:Name="BtnDeleteRec" Content="Удалить" Click="BtnDeleteRec_Click"></Button>
+                            <Button x:Name="BtnUpdateRecInv" Content="Редактировать" Click="BtnUpdateRecInv_Click"></Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="BtnBack" Content="Вернуться на главную" Margin="107,27,0,0" Width="200" Height="50" Grid.Row="1" Click="BtnBack_Click" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-        <Button x:Name="BtnAddRec" Content="Добавить данные" Margin="485,27,0,28" Width="200" Grid.Row="1" Click="BtnAddRec_Click" HorizontalAlignment="Left"/>
+        <Button x:Name="BtnBack" Content="Вернуться на главную" Margin="81,27,0,0" Width="170" Height="50" Grid.Row="1" Click="BtnBack_Click" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <Button x:Name="BtnAddRec" Content="Добавить данные" Margin="311,27,0,0" Grid.Row="1" Click="BtnAddRec_Click" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left" Width="170"/>
+        <Button x:Name="BtnPDF" Content="Сохранить в PDF" Margin="541,27,0,0"  Click="BtnPDF_Click" Width="170" Height="50" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" />
     </Grid>
 </Window>
